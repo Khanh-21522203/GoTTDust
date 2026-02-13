@@ -7,6 +7,7 @@
 
 # Go build artifacts
 bin/
+server
 *.exe
 *.exe~
 *.dll
