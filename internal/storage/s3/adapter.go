@@ -84,7 +84,7 @@ func (a *Adapter) GetObject(ctx context.Context, key string) ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("S3 GetObject %s: %w", key, err)
 	}
-	defer resp.Body.Close()
+	_ = resp.Body.Close()
 
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {

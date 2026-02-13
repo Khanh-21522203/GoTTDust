@@ -54,8 +54,8 @@ func newTestWALFsync(b *testing.B) (*ingestion.WALManager, string) {
 
 func BenchmarkWALWrite_100B_NoFsync(b *testing.B) {
 	wm, dir := newTestWAL(b)
-	defer os.RemoveAll(dir)
-	defer wm.Close()
+	_ = os.RemoveAll(dir)
+	_ = wm.Close()
 
 	rec := makeRecord(100)
 	b.SetBytes(100)
@@ -70,8 +70,8 @@ func BenchmarkWALWrite_100B_NoFsync(b *testing.B) {
 
 func BenchmarkWALWrite_1KB_NoFsync(b *testing.B) {
 	wm, dir := newTestWAL(b)
-	defer os.RemoveAll(dir)
-	defer wm.Close()
+	_ = os.RemoveAll(dir)
+	_ = wm.Close()
 
 	rec := makeRecord(1024)
 	b.SetBytes(1024)
@@ -86,8 +86,8 @@ func BenchmarkWALWrite_1KB_NoFsync(b *testing.B) {
 
 func BenchmarkWALWrite_10KB_NoFsync(b *testing.B) {
 	wm, dir := newTestWAL(b)
-	defer os.RemoveAll(dir)
-	defer wm.Close()
+	_ = os.RemoveAll(dir)
+	_ = wm.Close()
 
 	rec := makeRecord(10240)
 	b.SetBytes(10240)
@@ -104,8 +104,8 @@ func BenchmarkWALWrite_10KB_NoFsync(b *testing.B) {
 
 func BenchmarkWALWrite_1KB_Fsync(b *testing.B) {
 	wm, dir := newTestWALFsync(b)
-	defer os.RemoveAll(dir)
-	defer wm.Close()
+	_ = os.RemoveAll(dir)
+	_ = wm.Close()
 
 	rec := makeRecord(1024)
 	b.SetBytes(1024)
@@ -122,8 +122,8 @@ func BenchmarkWALWrite_1KB_Fsync(b *testing.B) {
 
 func BenchmarkWALWriteBatch_100x1KB_NoFsync(b *testing.B) {
 	wm, dir := newTestWAL(b)
-	defer os.RemoveAll(dir)
-	defer wm.Close()
+	_ = os.RemoveAll(dir)
+	_ = wm.Close()
 
 	records := make([]*common.ValidatedRecord, 100)
 	for i := range records {
@@ -141,8 +141,8 @@ func BenchmarkWALWriteBatch_100x1KB_NoFsync(b *testing.B) {
 
 func BenchmarkWALWriteBatch_1000x1KB_NoFsync(b *testing.B) {
 	wm, dir := newTestWAL(b)
-	defer os.RemoveAll(dir)
-	defer wm.Close()
+	_ = os.RemoveAll(dir)
+	_ = wm.Close()
 
 	records := make([]*common.ValidatedRecord, 1000)
 	for i := range records {
@@ -160,8 +160,8 @@ func BenchmarkWALWriteBatch_1000x1KB_NoFsync(b *testing.B) {
 
 func BenchmarkWALWriteBatch_100x1KB_Fsync(b *testing.B) {
 	wm, dir := newTestWALFsync(b)
-	defer os.RemoveAll(dir)
-	defer wm.Close()
+	_ = os.RemoveAll(dir)
+	_ = wm.Close()
 
 	records := make([]*common.ValidatedRecord, 100)
 	for i := range records {
@@ -181,8 +181,8 @@ func BenchmarkWALWriteBatch_100x1KB_Fsync(b *testing.B) {
 
 func BenchmarkWALWrite_10Streams_1KB(b *testing.B) {
 	wm, dir := newTestWAL(b)
-	defer os.RemoveAll(dir)
-	defer wm.Close()
+	_ = os.RemoveAll(dir)
+	_ = wm.Close()
 
 	streams := make([]common.StreamID, 10)
 	for i := range streams {
@@ -203,8 +203,8 @@ func BenchmarkWALWrite_10Streams_1KB(b *testing.B) {
 
 func BenchmarkWALSealSegment(b *testing.B) {
 	wm, dir := newTestWAL(b)
-	defer os.RemoveAll(dir)
-	defer wm.Close()
+	_ = os.RemoveAll(dir)
+	_ = wm.Close()
 
 	rec := makeRecord(1024)
 	for i := 0; i < 100; i++ {

@@ -68,7 +68,7 @@ func (l *Logger) Query(ctx context.Context, resourceType, resourceID string, lim
 	if err != nil {
 		return nil, fmt.Errorf("query audit log: %w", err)
 	}
-	defer rows.Close()
+	_ = rows.Close()
 
 	var entries []*common.AuditLog
 	for rows.Next() {

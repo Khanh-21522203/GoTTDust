@@ -114,9 +114,7 @@ func (s *StreamAggregate) Validate() error {
 	}
 	if err := s.RetentionPolicy.Validate(); err != nil {
 		if ve, ok := err.(*ValidationErrors); ok {
-			for _, e := range ve.Errors {
-				errs.Errors = append(errs.Errors, e)
-			}
+			errs.Errors = append(errs.Errors, ve.Errors...)
 		}
 	}
 

@@ -105,5 +105,5 @@ func (l *Logger) WithContext(ctx context.Context) *logrus.Entry {
 
 // ForComponent returns a logger scoped to a specific component target.
 func (l *Logger) ForComponent(component string) *logrus.Entry {
-	return l.Logger.WithField("target", "ttdust::"+component)
+	return l.WithField("target", "ttdust::"+component)
 }

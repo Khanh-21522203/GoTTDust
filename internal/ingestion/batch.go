@@ -137,7 +137,7 @@ func (be *BatchExecutor) executeJob(ctx context.Context, job *BatchJob) {
 		be.persistJob(ctx, job)
 		return
 	}
-	defer reader.Close()
+	_ = reader.Close()
 
 	streamID := common.StreamID(job.StreamID)
 	buf := be.bufferManager.GetOrCreate(streamID)

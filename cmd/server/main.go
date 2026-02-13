@@ -84,7 +84,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to PostgreSQL: %v", err)
 	}
-	defer pgAdapter.Close()
+	_ = pgAdapter.Close()
 	db := pgAdapter.DB()
 
 	// Redis
@@ -97,7 +97,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to Redis: %v", err)
 	}
-	defer redisAdapter.Close()
+	_ = redisAdapter.Close()
 
 	// S3
 	s3Adapter, err := s3adapter.NewAdapter(ctx, s3adapter.Config{
@@ -178,7 +178,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create WAL manager: %v", err)
 	}
-	defer walManager.Close()
+	_ = walManager.Close()
 
 	// WAL recovery on startup
 	recovered, err := walManager.Recover()
@@ -438,7 +438,7 @@ func main() {
 				// Hot-reload log level
 				if newCfg.Observability.LogLevel != "" {
 					if lvl, err := logrus.ParseLevel(newCfg.Observability.LogLevel); err == nil {
-						logger.Logger.SetLevel(lvl)
+						logger.SetLevel(lvl)
 					}
 				}
 				cpMetrics.ConfigReloadsTotal.Inc()

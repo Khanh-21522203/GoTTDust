@@ -21,8 +21,8 @@ var walMagic = [6]byte{0x54, 0x54, 0x44, 0x57, 0x41, 0x4C}
 
 const (
 	walVersion    uint16 = 1
-	walHeaderSize        = 32 // 6 magic + 2 version + 16 streamID UUID + 8 segment number
-	walFooterSize        = 12 // 8 checksum + 4 record count
+	walHeaderSize uint16 = 32 // 6 magic + 2 version + 16 streamID UUID + 8 segment number
+	walFooterSize uint16 = 12 // 8 checksum + 4 record count
 )
 
 // SegmentState represents the lifecycle state of a WAL segment.
@@ -301,7 +301,7 @@ func ReadSegment(path string) ([][]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("open WAL segment: %w", err)
 	}
-	defer f.Close()
+	_ = f.Close()
 
 	// Read and validate header
 	header := make([]byte, walHeaderSize)
@@ -507,7 +507,7 @@ func (wm *WALManager) createSegment(streamID common.StreamID) (*WALSegment, erro
 	binary.BigEndian.PutUint64(header[24:32], segNum)
 
 	if _, err := f.Write(header); err != nil {
-		f.Close()
+		_ = f.Close()
 		return nil, fmt.Errorf("write WAL header: %w", err)
 	}
 

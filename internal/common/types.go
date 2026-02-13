@@ -118,10 +118,10 @@ func ParsePartitionPath(path string) (PartitionKey, error) {
 	if len(segs) >= 2 {
 		pk.StreamID = StreamID(segs[1])
 	}
-	fmt.Sscanf(parts["year"], "%d", &pk.Year)
-	fmt.Sscanf(parts["month"], "%d", &pk.Month)
-	fmt.Sscanf(parts["day"], "%d", &pk.Day)
-	fmt.Sscanf(parts["hour"], "%d", &pk.Hour)
+	_, _ = fmt.Sscanf(parts["year"], "%d", &pk.Year)
+	_, _ = fmt.Sscanf(parts["month"], "%d", &pk.Month)
+	_, _ = fmt.Sscanf(parts["day"], "%d", &pk.Day)
+	_, _ = fmt.Sscanf(parts["hour"], "%d", &pk.Hour)
 	return pk, nil
 }
 

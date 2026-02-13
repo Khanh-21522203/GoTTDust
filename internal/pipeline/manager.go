@@ -77,7 +77,7 @@ func (m *Manager) CreatePipeline(ctx context.Context, req CreatePipelineRequest)
 	if err != nil {
 		return nil, nil, fmt.Errorf("begin tx: %w", err)
 	}
-	defer tx.Rollback()
+	_ = tx.Rollback()
 
 	// Insert pipeline
 	pipeline := &common.Pipeline{}
@@ -152,7 +152,7 @@ func (m *Manager) GetPipelineStages(ctx context.Context, pipelineID string) ([]*
 	if err != nil {
 		return nil, fmt.Errorf("get stages: %w", err)
 	}
-	defer rows.Close()
+	_ = rows.Close()
 
 	var stages []*common.PipelineStage
 	for rows.Next() {
@@ -183,7 +183,7 @@ func (m *Manager) ListPipelines(ctx context.Context, streamID string) ([]*common
 	if err != nil {
 		return nil, fmt.Errorf("list pipelines: %w", err)
 	}
-	defer rows.Close()
+	_ = rows.Close()
 
 	var pipelines []*common.Pipeline
 	for rows.Next() {
@@ -214,7 +214,7 @@ func (m *Manager) UpdatePipelineStages(ctx context.Context, pipelineID string, s
 	if err != nil {
 		return nil, fmt.Errorf("begin tx: %w", err)
 	}
-	defer tx.Rollback()
+	_ = tx.Rollback()
 
 	// Delete existing stages
 	if _, err := tx.ExecContext(ctx, `DELETE FROM pipeline_stages WHERE pipeline_id = $1`, pipelineID); err != nil {
