@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package ttdust.ingestion.v1;
+
+option go_package = "GoTTDust/internal/genproto/ingestionpb";
+
+service IngestionService {
+  // Bidirectional stream for record ingestion
+  rpc IngestStream(stream IngestRequest) returns (stream IngestResponse);
+
+  // Unary call for single record ingestion
+  rpc Ingest(IngestRequest) returns (IngestResponse);
+
+  // Batch ingestion from file
+  rpc IngestBatch(IngestBatchRequest) returns (IngestBatchResponse);
+
+  // Get batch job status
+  rpc GetBatchJob(GetBatchJobRequest) returns (BatchJobResponse);
+}
+
+message IngestRequest {
+  string stream_id = 1;
+  string schema_id = 2;
+  bytes payload = 3;                    // JSON-encoded record
+  optional string idempotency_key = 4;  // Client-provided dedup key
+  map<string, string> metadata = 5;     // Custom metadata
+}
+
+message IngestResponse {
+  string record_id = 1;                 // Server-assigned ID
+  int64 sequence_number = 2;            // Per-stream sequence
+  int64 timestamp_unix_micros = 3;      // Server receive time
+  Status status = 4;
+  optional IngestError error = 5;
+}
+
+message IngestError {
+  string code = 1;
+  string message = 2;
+  repeated FieldValidationError field_errors = 3;
+}
+
+message FieldValidationError {
+  string path = 1;      // JSON path (e.g., "$.user.email")
+  string message = 2;   // Error description
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_OK = 1;
+  STATUS_VALIDATION_ERROR = 2;
+  STATUS_DUPLICATE = 3;
+  STATUS_RATE_LIMITED = 4;
+  STATUS_INTERNAL_ERROR = 5;
+}
+
+message IngestBatchRequest {
+  string stream_id = 1;
+  string schema_id = 2;
+  string source_uri = 3;           // S3 URI to source file
+  SourceFormat format = 4;
+  map<string, string> options = 5; // Format-specific options
+}
+
+enum SourceFormat {
+  FORMAT_UNSPECIFIED = 0;
+  FORMAT_JSON_LINES = 1;
+  FORMAT_PARQUET = 2;
+  FORMAT_CSV = 3;
+}
+
+message IngestBatchResponse {
+  string job_id = 1;
+  JobStatus status = 2;
+  int64 records_processed = 3;
+  int64 records_succeeded = 4;
+  int64 records_failed = 5;
+  repeated BatchError errors = 6;
+}
+
+enum JobStatus {
+  JOB_STATUS_UNSPECIFIED = 0;
+  JOB_STATUS_PENDING = 1;
+  JOB_STATUS_RUNNING = 2;
+  JOB_STATUS_COMPLETED = 3;
+  JOB_STATUS_FAILED = 4;
+}
+
+message GetBatchJobRequest {
+  string job_id = 1;
+}
+
+message BatchJobResponse {
+  string job_id = 1;
+  string stream_id = 2;
+  JobStatus status = 3;
+  int64 records_processed = 4;
+  int64 records_succeeded = 5;
+  int64 records_failed = 6;
+  repeated BatchError errors = 7;
+  int64 created_at_unix_micros = 8;
+  int64 completed_at_unix_micros = 9;
+}
+
+message BatchError {
+  int64 line_number = 1;
+  string message = 2;
+  string field = 3;
+}

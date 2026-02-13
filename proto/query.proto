@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package ttdust.query.v1;
+
+option go_package = "GoTTDust/internal/genproto/querypb";
+
+service QueryService {
+  // Time-range query with pagination
+  rpc QueryTimeRange(TimeRangeQueryRequest) returns (TimeRangeQueryResponse);
+
+  // Key-based lookup
+  rpc LookupByKey(KeyLookupRequest) returns (KeyLookupResponse);
+
+  // Streaming read (server streaming)
+  rpc StreamingRead(StreamingReadRequest) returns (stream StreamingReadResponse);
+}
+
+message Record {
+  string record_id = 1;
+  string stream_id = 2;
+  int64 sequence_number = 3;
+  int64 timestamp_unix_micros = 4;
+  bytes payload = 5;                    // JSON-encoded record
+  map<string, string> metadata = 6;
+}
+
+message QueryMetadata {
+  int64 total_records_scanned = 1;
+  int64 partitions_scanned = 2;
+  int64 cache_hits = 3;
+  int64 execution_time_micros = 4;
+}
+
+message TimeRangeQueryRequest {
+  string stream_id = 1;
+  int64 start_time_unix_micros = 2;
+  int64 end_time_unix_micros = 3;
+  optional int32 limit = 4;            // Max records (default 1000)
+  optional string cursor = 5;          // Pagination cursor
+}
+
+message TimeRangeQueryResponse {
+  repeated Record records = 1;
+  optional string next_cursor = 2;     // For pagination
+  QueryMetadata metadata = 3;
+}
+
+message KeyLookupRequest {
+  string stream_id = 1;
+  string key_field = 2;                // Field to match
+  string key_value = 3;                // Value to find
+}
+
+message KeyLookupResponse {
+  optional Record record = 1;          // Latest record with key
+  bool found = 2;
+}
+
+message StreamingReadRequest {
+  string stream_id = 1;
+  optional int64 start_sequence = 2;   // Start from sequence number
+  optional int64 start_time = 3;       // Or start from timestamp
+}
+
+// Server streaming response
+message StreamingReadResponse {
+  Record record = 1;
+  bool is_historical = 2;              // False when caught up to live
+}

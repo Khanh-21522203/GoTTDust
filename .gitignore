@@ -1,0 +1,93 @@
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Go build artifacts
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage.out
+coverage.html
+
+# Go modules cache
+go.sum
+vendor/
+
+# Dependency directories
+node_modules/
+
+# Logs
+*.log
+logs/
+/var/log/
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# WAL and data directories
+/var/lib/ttdust/
+/data/
+wal-data/
+*.wal
+
+# Docker
+.dockerignore
+
+# Temporary files
+*.tmp
+*.temp
+*.pid
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# Editor backup files
+*.bak
+*.backup
+
+# Performance profiling
+*.prof
+*.pprof
+*.cpu
+*.mem
+
+# Local configuration overrides
+config/local/
+*.local.yaml
+*.local.yml
+*.local.json
+
+# Terraform (if used)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Kubernetes secrets (if used)
+*.secret
+secrets/
+
+# Test artifacts
+test-results/
+junit.xml

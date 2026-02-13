@@ -1,0 +1,110 @@
+# TTDust Prometheus Alert Rules per observability.md §6
+
+groups:
+  - name: ttdust-critical
+    rules:
+      - alert: TTDustIngestionDown
+        expr: |
+          sum(rate(ttdust_ingestion_requests_total[5m])) == 0
+          and sum(ttdust_grpc_connections_active) > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "TTDust ingestion is not processing requests"
+          runbook: "docs/runbooks/runbook.md#ingestion-down"
+
+      - alert: TTDustHighErrorRate
+        expr: |
+          sum(rate(ttdust_ingestion_requests_total{status!="ok"}[5m]))
+          /
+          sum(rate(ttdust_ingestion_requests_total[5m]))
+          > 0.05
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "TTDust error rate above 5%"
+          runbook: "docs/runbooks/runbook.md#high-error-rate"
+
+      - alert: TTDustPostgresDown
+        expr: ttdust_pg_connections_active == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "TTDust cannot connect to PostgreSQL"
+          runbook: "docs/runbooks/runbook.md#postgres-down"
+
+      - alert: TTDustWALDiskFull
+        expr: |
+          (node_filesystem_avail_bytes{mountpoint="/var/lib/ttdust"}
+           / node_filesystem_size_bytes{mountpoint="/var/lib/ttdust"})
+          < 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "TTDust WAL disk below 10% free"
+          runbook: "docs/runbooks/runbook.md#wal-disk-full"
+
+  - name: ttdust-warning
+    rules:
+      - alert: TTDustHighLatency
+        expr: |
+          histogram_quantile(0.99,
+            sum(rate(ttdust_ingestion_latency_seconds_bucket[5m])) by (le)
+          ) > 0.1
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "TTDust p99 ingestion latency above 100ms"
+
+      - alert: TTDustBackpressure
+        expr: |
+          sum(rate(ttdust_ingestion_backpressure_total[5m])) > 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "TTDust is applying backpressure"
+
+      - alert: TTDustRedisDown
+        expr: ttdust_redis_connections_active == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "TTDust cannot connect to Redis (degraded mode)"
+
+      - alert: TTDustS3Slow
+        expr: |
+          histogram_quantile(0.99,
+            sum(rate(ttdust_s3_latency_seconds_bucket{operation="put"}[5m])) by (le)
+          ) > 2
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "TTDust S3 uploads taking over 2 seconds"
+
+  - name: ttdust-info
+    rules:
+      - alert: TTDustDLQGrowing
+        expr: |
+          sum(rate(ttdust_processing_dlq_records_total[1h])) > 100
+        for: 1h
+        labels:
+          severity: info
+        annotations:
+          summary: "TTDust DLQ receiving more than 100 records/hour"
+
+      - alert: TTDustCompactionFailing
+        expr: |
+          sum(rate(ttdust_compaction_runs_total{status="failed"}[1h])) > 0
+        for: 1h
+        labels:
+          severity: info
+        annotations:
+          summary: "TTDust compaction jobs are failing"

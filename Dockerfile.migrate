@@ -1,0 +1,19 @@
+# syntax=docker/dockerfile:1.6
+
+FROM golang:1.21-bookworm AS builder
+
+RUN go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /go/bin/migrate /usr/local/bin/migrate
+COPY migrations /app/migrations
+
+WORKDIR /app
+
+ENTRYPOINT ["migrate", "-path", "/app/migrations", "-database"]
+CMD ["postgres://ttdust:ttdust_dev_password@postgres:5432/ttdust?sslmode=disable", "up"]

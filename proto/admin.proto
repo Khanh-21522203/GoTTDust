@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package ttdust.admin.v1;
+
+option go_package = "GoTTDust/internal/genproto/adminpb";
+
+service AdminService {
+  rpc CreateStream(CreateStreamRequest) returns (CreateStreamResponse);
+  rpc UpdateStream(UpdateStreamRequest) returns (UpdateStreamResponse);
+  rpc DeleteStream(DeleteStreamRequest) returns (DeleteStreamResponse);
+  rpc ListStreams(ListStreamsRequest) returns (ListStreamsResponse);
+  rpc GetStream(GetStreamRequest) returns (GetStreamResponse);
+}
+
+message StreamConfig {
+  string stream_id = 1;
+  string name = 2;
+  string description = 3;
+  string schema_id = 4;
+  map<string, string> labels = 5;
+  RetentionConfig retention = 6;
+}
+
+message RetentionConfig {
+  int64 retention_days = 1;
+}
+
+message CreateStreamRequest {
+  StreamConfig config = 1;
+}
+
+message CreateStreamResponse {
+  StreamConfig stream = 1;
+}
+
+message UpdateStreamRequest {
+  StreamConfig config = 1;
+}
+
+message UpdateStreamResponse {
+  StreamConfig stream = 1;
+}
+
+message DeleteStreamRequest {
+  string stream_id = 1;
+  bool force = 2;  // Must purge data first unless force=true
+}
+
+message DeleteStreamResponse {
+  bool success = 1;
+}
+
+message ListStreamsRequest {
+  optional int32 limit = 1;
+  optional string cursor = 2;
+}
+
+message ListStreamsResponse {
+  repeated StreamConfig streams = 1;
+  optional string next_cursor = 2;
+}
+
+message GetStreamRequest {
+  string stream_id = 1;
+}
+
+message GetStreamResponse {
+  StreamConfig stream = 1;
+}

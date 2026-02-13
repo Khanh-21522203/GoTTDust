@@ -1,0 +1,14 @@
+# Prometheus configuration for TTDust
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "alerts.yml"
+
+scrape_configs:
+  - job_name: 'ttdust'
+    static_configs:
+      - targets: ['ttdust:8080']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
