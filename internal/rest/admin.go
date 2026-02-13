@@ -43,7 +43,7 @@ func (ah *AdminHandler) handleConfig(w http.ResponseWriter, r *http.Request) {
 			writeAdminError(w, http.StatusInternalServerError, "INTERNAL_ERROR", err.Error())
 			return
 		}
-		defer rows.Close()
+		_ = rows.Close()
 
 		result := make(map[string]json.RawMessage)
 		for rows.Next() {
@@ -158,7 +158,7 @@ func (ah *AdminHandler) handleAPIKeys(w http.ResponseWriter, r *http.Request) {
 			writeAdminError(w, http.StatusInternalServerError, "INTERNAL_ERROR", err.Error())
 			return
 		}
-		defer rows.Close()
+		_ = rows.Close()
 
 		type apiKeyResponse struct {
 			KeyID             string          `json:"key_id"`
