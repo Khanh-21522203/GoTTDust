@@ -9,15 +9,15 @@ import (
 
 // SchemaAggregate is the aggregate root for schemas.
 type SchemaAggregate struct {
-	ID          string               `json:"id"`
-	Name        string               `json:"name"`
-	Namespace   string               `json:"namespace"`
-	Description *string              `json:"description,omitempty"`
+	ID          string                `json:"id"`
+	Name        string                `json:"name"`
+	Namespace   string                `json:"namespace"`
+	Description *string               `json:"description,omitempty"`
 	Versions    []SchemaVersionEntity `json:"versions"`
-	CreatedAt   time.Time            `json:"created_at"`
-	UpdatedAt   time.Time            `json:"updated_at"`
-	CreatedBy   ActorID              `json:"created_by"`
-	DeletedAt   *time.Time           `json:"deleted_at,omitempty"`
+	CreatedAt   time.Time             `json:"created_at"`
+	UpdatedAt   time.Time             `json:"updated_at"`
+	CreatedBy   ActorID               `json:"created_by"`
+	DeletedAt   *time.Time            `json:"deleted_at,omitempty"`
 }
 
 // Validate checks schema aggregate invariants.
@@ -187,14 +187,14 @@ func (r *RecordEntity) Validate() error {
 
 // PipelineAggregate represents a processing pipeline.
 type PipelineAggregate struct {
-	ID        string               `json:"id"`
-	Name      string               `json:"name"`
-	StreamID  string               `json:"stream_id"`
-	Status    PipelineStatus       `json:"status"`
+	ID        string                `json:"id"`
+	Name      string                `json:"name"`
+	StreamID  string                `json:"stream_id"`
+	Status    PipelineStatus        `json:"status"`
 	Stages    []PipelineStageEntity `json:"stages"`
-	DLQConfig *DLQConfigValue      `json:"dlq_config,omitempty"`
-	CreatedAt time.Time            `json:"created_at"`
-	UpdatedAt time.Time            `json:"updated_at"`
+	DLQConfig *DLQConfigValue       `json:"dlq_config,omitempty"`
+	CreatedAt time.Time             `json:"created_at"`
+	UpdatedAt time.Time             `json:"updated_at"`
 }
 
 // Validate checks pipeline invariants.
@@ -245,7 +245,7 @@ type FieldProjectionConfig struct {
 
 // TimestampNormalizationConfig for timestamp normalization stages.
 type TimestampNormalizationConfig struct {
-	SourceField   string           `json:"source_field"`
+	SourceField   string            `json:"source_field"`
 	SourceFormats []TimestampFormat `json:"source_formats"`
 	TargetFormat  TimestampFormat   `json:"target_format"`
 }

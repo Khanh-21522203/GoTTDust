@@ -19,8 +19,8 @@ const (
 
 // Config holds rate limit configuration per category.
 type Config struct {
-	Limit int           // Requests per window
-	Burst int           // Burst allowance
+	Limit  int           // Requests per window
+	Burst  int           // Burst allowance
 	Window time.Duration // Window duration
 }
 
@@ -35,10 +35,10 @@ func DefaultConfigs() map[Category]Config {
 
 // Result holds the outcome of a rate limit check.
 type Result struct {
-	Allowed   bool
-	Limit     int
-	Remaining int
-	ResetAt   time.Time
+	Allowed    bool
+	Limit      int
+	Remaining  int
+	ResetAt    time.Time
 	RetryAfter time.Duration
 }
 

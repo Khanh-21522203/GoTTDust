@@ -256,11 +256,11 @@ const (
 type TimestampFormat string
 
 const (
-	TimestampUnixSeconds TimestampFormat = "unix_seconds"
-	TimestampUnixMillis  TimestampFormat = "unix_millis"
-	TimestampUnixMicros  TimestampFormat = "unix_micros"
-	TimestampISO8601     TimestampFormat = "iso8601"
-	TimestampRFC3339     TimestampFormat = "rfc3339"
+	TimestampUnixSeconds   TimestampFormat = "unix_seconds"
+	TimestampUnixMillis    TimestampFormat = "unix_millis"
+	TimestampUnixMicros    TimestampFormat = "unix_micros"
+	TimestampISO8601       TimestampFormat = "iso8601"
+	TimestampRFC3339       TimestampFormat = "rfc3339"
 	TimestampRFC3339Micros TimestampFormat = "rfc3339_micros"
 )
 

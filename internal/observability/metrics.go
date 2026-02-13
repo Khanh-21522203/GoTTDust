@@ -25,40 +25,40 @@ type DataPlaneMetrics struct {
 	IngestionBackpressureTotal    *prometheus.CounterVec
 
 	// --- Processing metrics (§2.3) ---
-	ProcessingRecordsTotal      *prometheus.CounterVec
-	ProcessingLatency           *prometheus.HistogramVec
-	ProcessingStageLatency      *prometheus.HistogramVec
-	ProcessingDLQRecordsTotal   *prometheus.CounterVec
-	ProcessingErrorsTotal       *prometheus.CounterVec
+	ProcessingRecordsTotal    *prometheus.CounterVec
+	ProcessingLatency         *prometheus.HistogramVec
+	ProcessingStageLatency    *prometheus.HistogramVec
+	ProcessingDLQRecordsTotal *prometheus.CounterVec
+	ProcessingErrorsTotal     *prometheus.CounterVec
 
 	// --- Storage metrics (§2.4) ---
-	WALWritesTotal          *prometheus.CounterVec
-	WALBytesTotal           *prometheus.CounterVec
-	WALSegmentsActive       *prometheus.GaugeVec
-	WALFlushLatency         *prometheus.HistogramVec
-	S3OperationsTotal       *prometheus.CounterVec
-	S3Latency               *prometheus.HistogramVec
-	S3BytesTotal            *prometheus.CounterVec
-	StorageFilesTotal       *prometheus.GaugeVec
-	StorageBytesTotal       *prometheus.GaugeVec
-	CompactionRunsTotal     *prometheus.CounterVec
+	WALWritesTotal      *prometheus.CounterVec
+	WALBytesTotal       *prometheus.CounterVec
+	WALSegmentsActive   *prometheus.GaugeVec
+	WALFlushLatency     *prometheus.HistogramVec
+	S3OperationsTotal   *prometheus.CounterVec
+	S3Latency           *prometheus.HistogramVec
+	S3BytesTotal        *prometheus.CounterVec
+	StorageFilesTotal   *prometheus.GaugeVec
+	StorageBytesTotal   *prometheus.GaugeVec
+	CompactionRunsTotal *prometheus.CounterVec
 
 	// --- Query metrics (§2.5) ---
-	QueryRequestsTotal       *prometheus.CounterVec
-	QueryLatency             *prometheus.HistogramVec
-	QueryRecordsReturned     *prometheus.HistogramVec
-	QueryPartitionsScanned   *prometheus.HistogramVec
-	QueryCacheHitsTotal      *prometheus.CounterVec
-	QueryCacheMissesTotal    *prometheus.CounterVec
+	QueryRequestsTotal     *prometheus.CounterVec
+	QueryLatency           *prometheus.HistogramVec
+	QueryRecordsReturned   *prometheus.HistogramVec
+	QueryPartitionsScanned *prometheus.HistogramVec
+	QueryCacheHitsTotal    *prometheus.CounterVec
+	QueryCacheMissesTotal  *prometheus.CounterVec
 
 	// --- Infrastructure metrics (§2.6) ---
-	PGConnectionsActive     prometheus.Gauge
-	PGConnectionsIdle       prometheus.Gauge
-	PGQueryLatency          *prometheus.HistogramVec
-	RedisConnectionsActive  prometheus.Gauge
-	RedisLatency            *prometheus.HistogramVec
-	GRPCConnectionsActive   prometheus.Gauge
-	HTTPConnectionsActive   prometheus.Gauge
+	PGConnectionsActive    prometheus.Gauge
+	PGConnectionsIdle      prometheus.Gauge
+	PGQueryLatency         *prometheus.HistogramVec
+	RedisConnectionsActive prometheus.Gauge
+	RedisLatency           *prometheus.HistogramVec
+	GRPCConnectionsActive  prometheus.Gauge
+	HTTPConnectionsActive  prometheus.Gauge
 }
 
 // NewDataPlaneMetrics registers and returns all data plane metrics.

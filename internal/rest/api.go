@@ -242,7 +242,7 @@ func (h *APIHandler) createStream(w http.ResponseWriter, r *http.Request) {
 		Description     string                  `json:"description"`
 		SchemaID        string                  `json:"schema_id"`
 		RetentionPolicy *common.RetentionPolicy `json:"retention_policy"`
-		PartitionConfig *common.PartitionConfig  `json:"partition_config"`
+		PartitionConfig *common.PartitionConfig `json:"partition_config"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "invalid JSON body")
@@ -303,7 +303,7 @@ func (h *APIHandler) handleStreamByID(w http.ResponseWriter, r *http.Request) {
 		var req struct {
 			Description     *string                 `json:"description"`
 			RetentionPolicy *common.RetentionPolicy `json:"retention_policy"`
-			PartitionConfig *common.PartitionConfig  `json:"partition_config"`
+			PartitionConfig *common.PartitionConfig `json:"partition_config"`
 			Status          *string                 `json:"status"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {

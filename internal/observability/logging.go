@@ -10,9 +10,9 @@ import (
 
 // LogConfig holds logging configuration per observability.md §3.5.
 type LogConfig struct {
-	Level         string `mapstructure:"level"`          // debug, info, warn, error
-	Format        string `mapstructure:"format"`         // json, pretty
-	Output        string `mapstructure:"output"`         // stdout, file
+	Level         string `mapstructure:"level"`  // debug, info, warn, error
+	Format        string `mapstructure:"format"` // json, pretty
+	Output        string `mapstructure:"output"` // stdout, file
 	FilePath      string `mapstructure:"file_path"`
 	IncludeTarget bool   `mapstructure:"include_target"`
 	IncludeSpan   bool   `mapstructure:"include_span"`

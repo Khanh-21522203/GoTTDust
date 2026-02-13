@@ -43,9 +43,9 @@ type DLQInput struct {
 
 // supportedStageTypes lists the valid stage types for MVP.
 var supportedStageTypes = map[string]bool{
-	"field_projection":         true,
-	"timestamp_normalization":  true,
-	"type_coercion":            true,
+	"field_projection":        true,
+	"timestamp_normalization": true,
+	"type_coercion":           true,
 }
 
 // CreatePipeline creates a new pipeline with stages (atomic).

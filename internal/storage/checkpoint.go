@@ -13,17 +13,17 @@ import (
 
 // Checkpoint tracks the last flushed position per stream for crash recovery.
 type Checkpoint struct {
-	NodeID    string                       `json:"node_id"`
-	Streams   map[string]StreamCheckpoint  `json:"streams"`
-	UpdatedAt time.Time                    `json:"updated_at"`
+	NodeID    string                      `json:"node_id"`
+	Streams   map[string]StreamCheckpoint `json:"streams"`
+	UpdatedAt time.Time                   `json:"updated_at"`
 }
 
 // StreamCheckpoint tracks flush progress for a single stream.
 type StreamCheckpoint struct {
-	StreamID        string    `json:"stream_id"`
-	LastSegment     int64     `json:"last_segment"`
-	LastSequence    int64     `json:"last_sequence"`
-	LastFlushedAt   time.Time `json:"last_flushed_at"`
+	StreamID      string    `json:"stream_id"`
+	LastSegment   int64     `json:"last_segment"`
+	LastSequence  int64     `json:"last_sequence"`
+	LastFlushedAt time.Time `json:"last_flushed_at"`
 }
 
 // StreamMetaSnapshot is a metadata snapshot stored alongside stream data in S3.
@@ -167,13 +167,13 @@ type CompactionLog struct {
 
 // CompactionEntry records a single compaction operation.
 type CompactionEntry struct {
-	Partition    string    `json:"partition"`
-	InputFiles   []string  `json:"input_files"`
-	OutputFile   string    `json:"output_file"`
-	InputBytes   int64     `json:"input_bytes"`
-	OutputBytes  int64     `json:"output_bytes"`
-	RecordCount  int64     `json:"record_count"`
-	CompactedAt  time.Time `json:"compacted_at"`
+	Partition   string    `json:"partition"`
+	InputFiles  []string  `json:"input_files"`
+	OutputFile  string    `json:"output_file"`
+	InputBytes  int64     `json:"input_bytes"`
+	OutputBytes int64     `json:"output_bytes"`
+	RecordCount int64     `json:"record_count"`
+	CompactedAt time.Time `json:"compacted_at"`
 }
 
 // SaveCompactionLog writes compaction state to S3.

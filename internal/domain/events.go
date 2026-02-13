@@ -23,7 +23,7 @@ type SchemaCreated struct {
 	Actor     ActorID   `json:"actor"`
 }
 
-func (e SchemaCreated) EventType() string    { return "schema.created" }
+func (e SchemaCreated) EventType() string     { return "schema.created" }
 func (e SchemaCreated) OccurredAt() time.Time { return e.Timestamp }
 
 // SchemaVersionAdded is emitted when a new version is added to a schema.
@@ -35,7 +35,7 @@ type SchemaVersionAdded struct {
 	Actor       ActorID   `json:"actor"`
 }
 
-func (e SchemaVersionAdded) EventType() string    { return "schema.version_added" }
+func (e SchemaVersionAdded) EventType() string     { return "schema.version_added" }
 func (e SchemaVersionAdded) OccurredAt() time.Time { return e.Timestamp }
 
 // SchemaVersionDeprecated is emitted when a schema version is deprecated.
@@ -46,7 +46,7 @@ type SchemaVersionDeprecated struct {
 	Actor     ActorID   `json:"actor"`
 }
 
-func (e SchemaVersionDeprecated) EventType() string    { return "schema.version_deprecated" }
+func (e SchemaVersionDeprecated) EventType() string     { return "schema.version_deprecated" }
 func (e SchemaVersionDeprecated) OccurredAt() time.Time { return e.Timestamp }
 
 // SchemaDeleted is emitted when a schema is deleted.
@@ -56,7 +56,7 @@ type SchemaDeleted struct {
 	Actor     ActorID   `json:"actor"`
 }
 
-func (e SchemaDeleted) EventType() string    { return "schema.deleted" }
+func (e SchemaDeleted) EventType() string     { return "schema.deleted" }
 func (e SchemaDeleted) OccurredAt() time.Time { return e.Timestamp }
 
 // --- Stream Events ---
@@ -70,7 +70,7 @@ type StreamCreated struct {
 	Actor     ActorID   `json:"actor"`
 }
 
-func (e StreamCreated) EventType() string    { return "stream.created" }
+func (e StreamCreated) EventType() string     { return "stream.created" }
 func (e StreamCreated) OccurredAt() time.Time { return e.Timestamp }
 
 // StreamStatusChanged is emitted when a stream's status changes.
@@ -82,7 +82,7 @@ type StreamStatusChanged struct {
 	Actor     ActorID      `json:"actor"`
 }
 
-func (e StreamStatusChanged) EventType() string    { return "stream.status_changed" }
+func (e StreamStatusChanged) EventType() string     { return "stream.status_changed" }
 func (e StreamStatusChanged) OccurredAt() time.Time { return e.Timestamp }
 
 // StreamDeleted is emitted when a stream is deleted.
@@ -92,7 +92,7 @@ type StreamDeleted struct {
 	Actor     ActorID   `json:"actor"`
 }
 
-func (e StreamDeleted) EventType() string    { return "stream.deleted" }
+func (e StreamDeleted) EventType() string     { return "stream.deleted" }
 func (e StreamDeleted) OccurredAt() time.Time { return e.Timestamp }
 
 // PipelineUpdated is emitted when a stream's pipeline is updated.
@@ -103,7 +103,7 @@ type PipelineUpdated struct {
 	Actor      ActorID   `json:"actor"`
 }
 
-func (e PipelineUpdated) EventType() string    { return "stream.pipeline_updated" }
+func (e PipelineUpdated) EventType() string     { return "stream.pipeline_updated" }
 func (e PipelineUpdated) OccurredAt() time.Time { return e.Timestamp }
 
 // --- Ingestion Events ---
@@ -117,7 +117,7 @@ type RecordIngested struct {
 	Timestamp time.Time `json:"timestamp"`
 }
 
-func (e RecordIngested) EventType() string    { return "ingestion.record_ingested" }
+func (e RecordIngested) EventType() string     { return "ingestion.record_ingested" }
 func (e RecordIngested) OccurredAt() time.Time { return e.Timestamp }
 
 // RecordRejected is emitted when a record is rejected.
@@ -127,7 +127,7 @@ type RecordRejected struct {
 	Timestamp time.Time `json:"timestamp"`
 }
 
-func (e RecordRejected) EventType() string    { return "ingestion.record_rejected" }
+func (e RecordRejected) EventType() string     { return "ingestion.record_rejected" }
 func (e RecordRejected) OccurredAt() time.Time { return e.Timestamp }
 
 // BatchCompleted is emitted when a batch import job completes.
@@ -139,7 +139,7 @@ type BatchCompleted struct {
 	Timestamp        time.Time `json:"timestamp"`
 }
 
-func (e BatchCompleted) EventType() string    { return "ingestion.batch_completed" }
+func (e BatchCompleted) EventType() string     { return "ingestion.batch_completed" }
 func (e BatchCompleted) OccurredAt() time.Time { return e.Timestamp }
 
 // --- EventBus ---

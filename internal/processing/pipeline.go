@@ -26,9 +26,9 @@ type Pipeline struct {
 
 // PipelineResult holds the outcome of processing a record.
 type PipelineResult struct {
-	Record  *common.ValidatedRecord
-	Payload []byte // Transformed payload
-	Failed  bool
+	Record   *common.ValidatedRecord
+	Payload  []byte // Transformed payload
+	Failed   bool
 	DLQEntry *common.DLQRecord
 }
 

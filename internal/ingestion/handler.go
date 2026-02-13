@@ -210,10 +210,10 @@ func (h *IngestionHandler) processRecord(ctx context.Context, req *pb.IngestRequ
 
 	// Build response
 	resp := &pb.IngestResponse{
-		RecordId:           string(recordID),
-		SequenceNumber:     int64(seqNum),
+		RecordId:            string(recordID),
+		SequenceNumber:      int64(seqNum),
 		TimestampUnixMicros: now.UnixMicro(),
-		Status:             pb.Status_STATUS_OK,
+		Status:              pb.Status_STATUS_OK,
 	}
 
 	// Store idempotency key

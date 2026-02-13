@@ -7,9 +7,9 @@ import (
 
 func TestNewSchemaName(t *testing.T) {
 	tests := []struct {
-		name     string
-		input    string
-		wantErr  bool
+		name    string
+		input   string
+		wantErr bool
 	}{
 		{"valid simple", "user-events", false},
 		{"valid with numbers", "a123", false},

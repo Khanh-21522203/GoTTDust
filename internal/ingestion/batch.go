@@ -27,23 +27,23 @@ const (
 
 // BatchJob represents an async batch import job.
 type BatchJob struct {
-	JobID             string         `json:"job_id"`
-	StreamID          string         `json:"stream_id"`
-	SourceURI         string         `json:"source_uri"`
-	Format            string         `json:"format"`
-	Status            BatchJobStatus `json:"status"`
-	RecordsProcessed  int64          `json:"records_processed"`
-	RecordsSucceeded  int64          `json:"records_succeeded"`
-	RecordsFailed     int64          `json:"records_failed"`
-	Errors            []BatchError   `json:"errors,omitempty"`
-	CreatedAt         time.Time      `json:"created_at"`
-	CompletedAt       *time.Time     `json:"completed_at,omitempty"`
+	JobID            string         `json:"job_id"`
+	StreamID         string         `json:"stream_id"`
+	SourceURI        string         `json:"source_uri"`
+	Format           string         `json:"format"`
+	Status           BatchJobStatus `json:"status"`
+	RecordsProcessed int64          `json:"records_processed"`
+	RecordsSucceeded int64          `json:"records_succeeded"`
+	RecordsFailed    int64          `json:"records_failed"`
+	Errors           []BatchError   `json:"errors,omitempty"`
+	CreatedAt        time.Time      `json:"created_at"`
+	CompletedAt      *time.Time     `json:"completed_at,omitempty"`
 }
 
 // BatchError describes a single error in a batch import.
 type BatchError struct {
-	Line    int    `json:"line"`
-	Error   string `json:"error"`
+	Line  int    `json:"line"`
+	Error string `json:"error"`
 }
 
 // BatchExecutor runs batch import jobs asynchronously.
@@ -76,11 +76,11 @@ func NewBatchExecutor(
 // SubmitJob creates a new batch job and starts async execution.
 func (be *BatchExecutor) SubmitJob(ctx context.Context, streamID, sourceURI, format string) (*BatchJob, error) {
 	job := &BatchJob{
-		JobID:    common.GenerateTraceID(),
-		StreamID: streamID,
+		JobID:     common.GenerateTraceID(),
+		StreamID:  streamID,
 		SourceURI: sourceURI,
-		Format:   format,
-		Status:   BatchJobPending,
+		Format:    format,
+		Status:    BatchJobPending,
 		CreatedAt: time.Now(),
 	}
 

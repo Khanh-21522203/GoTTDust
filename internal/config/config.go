@@ -68,10 +68,10 @@ type ProcessingConfig struct {
 }
 
 type CompactionConfig struct {
-	TargetFileSizeBytes    int64         `mapstructure:"target_file_size_bytes"`
-	MinFilesForCompaction  int           `mapstructure:"min_files_for_compaction"`
-	CompactionInterval     time.Duration `mapstructure:"compaction_interval"`
-	MaxConcurrentCompact   int           `mapstructure:"max_concurrent_compactions"`
+	TargetFileSizeBytes   int64         `mapstructure:"target_file_size_bytes"`
+	MinFilesForCompaction int           `mapstructure:"min_files_for_compaction"`
+	CompactionInterval    time.Duration `mapstructure:"compaction_interval"`
+	MaxConcurrentCompact  int           `mapstructure:"max_concurrent_compactions"`
 }
 
 type ObservabilityConfig struct {

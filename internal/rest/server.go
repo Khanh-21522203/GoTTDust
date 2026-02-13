@@ -20,9 +20,9 @@ type Server struct {
 
 // HealthStatus represents the health check response.
 type HealthStatus struct {
-	Status     string                        `json:"status"`
-	Components map[string]ComponentStatus    `json:"components,omitempty"`
-	Timestamp  string                        `json:"timestamp,omitempty"`
+	Status     string                     `json:"status"`
+	Components map[string]ComponentStatus `json:"components,omitempty"`
+	Timestamp  string                     `json:"timestamp,omitempty"`
 }
 
 // ComponentStatus is the health status of a single component.

@@ -18,8 +18,7 @@ server
 coverage.out
 coverage.html
 
-# Go modules cache
-go.sum
+# Go vendor directory
 vendor/
 
 # Dependency directories

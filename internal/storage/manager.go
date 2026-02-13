@@ -14,11 +14,11 @@ import (
 // Manager coordinates writes to WAL and Object Storage,
 // manages file lifecycle, maintains partition index, and handles cache coherence.
 type Manager struct {
-	mu       sync.RWMutex
-	s3       *s3adapter.Adapter
-	index    *PartitionIndex
-	nodeID   string
-	seqGen   uint64
+	mu     sync.RWMutex
+	s3     *s3adapter.Adapter
+	index  *PartitionIndex
+	nodeID string
+	seqGen uint64
 }
 
 // NewManager creates a new storage manager.

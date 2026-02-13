@@ -9,21 +9,21 @@ import (
 )
 
 const (
-	maxTimeRangeDays     = 7
-	maxRecordsPerPage    = 10000
+	maxTimeRangeDays      = 7
+	maxRecordsPerPage     = 10000
 	defaultRecordsPerPage = 1000
-	queryTimeout         = 30 * time.Second
-	maxConcurrentFetch   = 10
+	queryTimeout          = 30 * time.Second
+	maxConcurrentFetch    = 10
 )
 
 // QueryPlan describes how a query will be executed.
 type QueryPlan struct {
-	Partitions     []common.PartitionKey
-	Files          []storage.FileEntry
+	Partitions      []common.PartitionKey
+	Files           []storage.FileEntry
 	CachePartitions []common.PartitionKey // Partitions to check cache first
-	Limit          int
-	Cursor         string
-	Strategy       ExecutionStrategy
+	Limit           int
+	Cursor          string
+	Strategy        ExecutionStrategy
 }
 
 // ExecutionStrategy describes how to execute the query.

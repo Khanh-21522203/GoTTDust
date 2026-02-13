@@ -12,8 +12,8 @@ type TLSConfig struct {
 	Enabled    bool   `mapstructure:"enabled"`
 	CertFile   string `mapstructure:"cert_file"`
 	KeyFile    string `mapstructure:"key_file"`
-	CAFile     string `mapstructure:"ca_file"`      // For mTLS client CA
-	MinVersion string `mapstructure:"min_version"`   // "1.3" (default)
+	CAFile     string `mapstructure:"ca_file"`     // For mTLS client CA
+	MinVersion string `mapstructure:"min_version"` // "1.3" (default)
 }
 
 // BuildTLSConfig creates a *tls.Config from the TLS configuration.

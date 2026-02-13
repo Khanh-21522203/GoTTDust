@@ -6,7 +6,6 @@ import (
 	"strings"
 )
 
-
 // FieldProjection selects a subset of fields from input records.
 type FieldProjection struct {
 	IncludeFields []string
@@ -117,4 +116,3 @@ func deepCopyMap(src map[string]interface{}) map[string]interface{} {
 	}
 	return dst
 }
-

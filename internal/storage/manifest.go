@@ -16,13 +16,13 @@ const ManifestVersion = 1
 
 // Manifest tracks files within a partition for query planning.
 type Manifest struct {
-	Version      int             `json:"version"`
-	Partition    string          `json:"partition"`
-	StreamID     string          `json:"stream_id"`
-	Files        []ManifestFile  `json:"files"`
-	TotalRecords int64           `json:"total_records"`
-	TotalBytes   int64           `json:"total_bytes"`
-	UpdatedAt    time.Time       `json:"updated_at"`
+	Version      int            `json:"version"`
+	Partition    string         `json:"partition"`
+	StreamID     string         `json:"stream_id"`
+	Files        []ManifestFile `json:"files"`
+	TotalRecords int64          `json:"total_records"`
+	TotalBytes   int64          `json:"total_bytes"`
+	UpdatedAt    time.Time      `json:"updated_at"`
 }
 
 // ManifestFile describes a single Parquet file in a partition.
@@ -32,14 +32,14 @@ type ManifestFile struct {
 	RecordCount  int64     `json:"record_count"`
 	MinSequence  int64     `json:"min_sequence"`
 	MaxSequence  int64     `json:"max_sequence"`
-	MinTimestamp  time.Time `json:"min_timestamp"`
-	MaxTimestamp  time.Time `json:"max_timestamp"`
+	MinTimestamp time.Time `json:"min_timestamp"`
+	MaxTimestamp time.Time `json:"max_timestamp"`
 	CreatedAt    time.Time `json:"created_at"`
 }
 
 // ManifestManager handles reading and writing partition manifests in S3.
 type ManifestManager struct {
-	s3        *s3adapter.Adapter
+	s3         *s3adapter.Adapter
 	maxRetries int
 }
 

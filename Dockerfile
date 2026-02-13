@@ -3,7 +3,7 @@
 # ============================================================================
 # STAGE 1: Build Environment
 # ============================================================================
-FROM golang:1.21-bookworm AS builder
+FROM golang:1.25-bookworm AS builder
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \

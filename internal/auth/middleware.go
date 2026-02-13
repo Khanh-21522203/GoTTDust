@@ -39,9 +39,9 @@ type Permission struct {
 // HasRole checks if the principal has the given role or higher.
 func (p *Principal) HasRole(role string) bool {
 	hierarchy := map[string]int{
-		common.RoleAdmin: 100,
-		"operator":       80,
-		"schema_admin":   60,
+		common.RoleAdmin:  100,
+		"operator":        80,
+		"schema_admin":    60,
 		common.RoleWriter: 40,
 		common.RoleReader: 20,
 	}

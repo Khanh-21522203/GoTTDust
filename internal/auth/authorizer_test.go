@@ -7,10 +7,10 @@ import (
 
 func TestPrincipalHasRole(t *testing.T) {
 	tests := []struct {
-		name       string
-		role       string
-		checkRole  string
-		expected   bool
+		name      string
+		role      string
+		checkRole string
+		expected  bool
 	}{
 		{"admin has admin", "admin", "admin", true},
 		{"admin has writer", "admin", "writer", true},
