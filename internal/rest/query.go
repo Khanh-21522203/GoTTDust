@@ -209,13 +209,13 @@ func (qh *QueryRESTHandler) handleKeyLookup(w http.ResponseWriter, r *http.Reque
 func writeQueryJSON(w http.ResponseWriter, status int, data interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(data)
+	_ = json.NewEncoder(w).Encode(data)
 }
 
 func writeQueryError(w http.ResponseWriter, status int, code, message string) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(APIError{
+	_ = json.NewEncoder(w).Encode(APIError{
 		Error: APIErrorBody{
 			Code:    code,
 			Message: message,

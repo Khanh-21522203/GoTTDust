@@ -107,7 +107,7 @@ func (m *Manager) ListStreams(ctx context.Context, status string) ([]*common.Str
 	if err != nil {
 		return nil, fmt.Errorf("list streams: %w", err)
 	}
-	defer rows.Close()
+	_ = rows.Close()
 
 	var streams []*common.Stream
 	for rows.Next() {

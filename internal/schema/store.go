@@ -132,7 +132,7 @@ func (s *Store) ListSchemas(ctx context.Context) ([]*common.Schema, error) {
 	if err != nil {
 		return nil, fmt.Errorf("list schemas: %w", err)
 	}
-	defer rows.Close()
+	_ = rows.Close()
 
 	var schemas []*common.Schema
 	for rows.Next() {
@@ -204,7 +204,7 @@ func (s *Store) ListVersions(ctx context.Context, schemaID string) ([]*common.Sc
 	if err != nil {
 		return nil, fmt.Errorf("list versions: %w", err)
 	}
-	defer rows.Close()
+	_ = rows.Close()
 
 	var versions []*common.SchemaVersion
 	for rows.Next() {
